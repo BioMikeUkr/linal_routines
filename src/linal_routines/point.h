@@ -1,20 +1,20 @@
 #ifndef POINT_H
 #define POINT_H
 
-typedef struct POINT {
+typedef struct point {
     int type;
     double value;
-} POINT;
+} point;
 
-POINT *init_point(double value);
-POINT *init_zero_point();
-POINT *init_one_point();
-int free_point(POINT *point);
-int print_point(POINT *point);
+point *init_point(double value);
+point *init_zero_point();
+point *init_one_point();
+int free_point(point *point);
+int print_point(point *point);
 
-int add_point(POINT *point_1, POINT *point_2, POINT *out);
-int diff_point(POINT *point_1, POINT *point_2, POINT *out);
-int mul_point(POINT *point_1, POINT *point_2, POINT *out);
-int div_point(POINT *point_1, POINT *point_2, POINT *out);
+int add_point(point *point_1, point *point_2, point *out);
+int diff_point(point *point_1, point *point_2, point *out);
+int mul_point(point *point_1, point *point_2, point *out);
+int div_point(point *point_1, point *point_2, point *out);
 
 #endif

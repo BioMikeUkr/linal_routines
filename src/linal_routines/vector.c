@@ -5,8 +5,8 @@
 #include "point.h"
 #include "vector.h"
 
-//---------------------------------------------------- VECTOR
-int free_vector(VECTOR *vec) {
+//---------------------------------------------------- vector
+int free_vector(vector *vec) {
     for (int i=0; i < vec->size; i++) {
         free_point(vec->value[i]);
     }
@@ -15,7 +15,7 @@ int free_vector(VECTOR *vec) {
     return 0;
 }
 
-int print_vector(VECTOR *vec) {
+int print_vector(vector *vec) {
     printf("[");
     for (int i=0; i < vec->size; i++) {
         if (i == vec->size - 1) {
@@ -30,13 +30,13 @@ int print_vector(VECTOR *vec) {
     return 0;
 }
 
-VECTOR *init_vector(double *points, int size) {
-    VECTOR *vec = malloc(sizeof(VECTOR));
+vector *init_vector(double *points, int size) {
+    vector *vec = malloc(sizeof(vector));
     if (!vec) return NULL;
 
     vec->size = size;
     vec->type = 1;
-    vec->value = malloc(size * sizeof(POINT *));
+    vec->value = malloc(size * sizeof(point *));
     if (!vec->value) {
         free(vec);
         return NULL;
@@ -48,14 +48,14 @@ VECTOR *init_vector(double *points, int size) {
     return vec;
 }
 
-VECTOR *init_zero_vector(int size) {
-    VECTOR *vec = malloc(sizeof(VECTOR));
+vector *init_zero_vector(int size) {
+    vector *vec = malloc(sizeof(vector));
     if (!vec) return NULL;
 
     vec->size = size;
     vec->type = 1;
 
-    vec->value = malloc(size * sizeof(POINT *));
+    vec->value = malloc(size * sizeof(point *));
     if (!vec->value) {
         free(vec);
         return NULL;
@@ -66,14 +66,14 @@ VECTOR *init_zero_vector(int size) {
     }
     return vec;
 }
-VECTOR *init_one_vector(int size) {
-    VECTOR *vec = malloc(sizeof(VECTOR));
+vector *init_one_vector(int size) {
+    vector *vec = malloc(sizeof(vector));
     if (!vec) return NULL;
 
     vec->size = size;
     vec->type = 1;
 
-    vec->value = malloc(size * sizeof(POINT *));
+    vec->value = malloc(size * sizeof(point *));
     if (!vec->value) {
         free(vec);
         return NULL;
@@ -84,64 +84,64 @@ VECTOR *init_one_vector(int size) {
     }
     return vec;
 }
-int add_vector(VECTOR *vec_1, VECTOR *vec_2, VECTOR *out) {
+int add_vector(vector *vec_1, vector *vec_2, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         add_point(vec_1->value[i], vec_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int add_point_to_vector(VECTOR *vec_1, POINT *point, VECTOR *out) {
+int add_point_to_vector(vector *vec_1, point *point, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         add_point(vec_1->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int diff_vector(VECTOR *vec_1, VECTOR *vec_2, VECTOR *out) {
+int diff_vector(vector *vec_1, vector *vec_2, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         diff_point(vec_1->value[i], vec_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int diff_point_from_vector(VECTOR *vec_1, POINT *point, VECTOR *out) {
+int diff_point_from_vector(vector *vec_1, point *point, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         diff_point(vec_1->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int mul_vector(VECTOR *vec_1, VECTOR *vec_2, VECTOR *out) {
+int mul_vector(vector *vec_1, vector *vec_2, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         mul_point(vec_1->value[i], vec_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int mul_vector_by_point(VECTOR *vec, POINT *point, VECTOR *out) {
+int mul_vector_by_point(vector *vec, point *point, vector *out) {
     for (int i=0; i<vec->size; i++) {
         mul_point(vec->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int div_vector(VECTOR *vec_1, VECTOR *vec_2, VECTOR *out) {
+int div_vector(vector *vec_1, vector *vec_2, vector *out) {
     for (int i=0; i < vec_1->size; i++) {
         div_point(vec_1->value[i], vec_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int div_vector_by_point(VECTOR *vec, POINT *point, VECTOR *out) {
+int div_vector_by_point(vector *vec, point *point, vector *out) {
     for (int i=0; i<vec->size; i++) {
         div_point(vec->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int mat_mul_vector(VECTOR *vec_1, VECTOR *vec_2, POINT *out) {
-    VECTOR *temp_vector = init_zero_vector(vec_1->size);
+int mat_mul_vector(vector *vec_1, vector *vec_2, point *out) {
+    vector *temp_vector = init_zero_vector(vec_1->size);
     for (int i=0; i < vec_1->size; i++) {
         mul_point(vec_1->value[i], vec_2->value[i], temp_vector->value[i]);
         add_point(temp_vector->value[i], out, out);
@@ -150,8 +150,8 @@ int mat_mul_vector(VECTOR *vec_1, VECTOR *vec_2, POINT *out) {
     return 0;
 }
 
-int get_l2_norm(VECTOR *vec, POINT *out) {
-    VECTOR *temp_vec = init_zero_vector(vec->size);
+int get_l2_norm(vector *vec, point *out) {
+    vector *temp_vec = init_zero_vector(vec->size);
     for (int i=0; i<vec->size; i++) {
             mul_point(vec->value[i], vec->value[i], temp_vec->value[i]);
     }

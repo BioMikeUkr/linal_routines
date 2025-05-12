@@ -67,7 +67,7 @@ void *load_object_from_file(const char *filename, char **type_out) {
         }
     } else {
         // matrix
-        VECTOR *rows[1024];
+        vector *rows[1024];
         int row_count = 0;
         for (int i = 0; i < line_count; i++) {
             char *token = strtok(lines[i], "[], \n");

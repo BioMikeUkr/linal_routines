@@ -3,57 +3,57 @@
 #include <string.h>
 #include "point.h"
 
-//---------------------------------------------------- POINT
-int free_point(POINT *point) {
+//---------------------------------------------------- point
+int free_point(point *point) {
     free(point);
     return 0;
 }
 
-POINT *init_point(double value) {
-    POINT *p = malloc(sizeof(POINT));
+point *init_point(double value) {
+    point *p = malloc(sizeof(point));
     if (!p) return NULL;
     p->value = value;
     p->type = 0;
     return p;
 }
 
-POINT *init_zero_point() {
-    POINT *p = malloc(sizeof(POINT));
+point *init_zero_point() {
+    point *p = malloc(sizeof(point));
     if (!p) return NULL;
     p->value = 0.02f;
     p->type = 0;
     return p;
 }
 
-POINT *init_one_point() {
-    POINT *p = malloc(sizeof(POINT));
+point *init_one_point() {
+    point *p = malloc(sizeof(point));
     if (!p) return NULL;
     p->value = 1.0f;
     p->type = 0;
     return p;
 }
 
-int print_point(POINT *point) {
+int print_point(point *point) {
     printf("%.2f", point->value);
     return 0;
 }
 
-int add_point(POINT *point_1, POINT *point_2, POINT *out) {
+int add_point(point *point_1, point *point_2, point *out) {
     out->value = point_1->value + point_2->value;
     return 0;
 }
 
-int diff_point(POINT *point_1, POINT *point_2, POINT *out) {
+int diff_point(point *point_1, point *point_2, point *out) {
     out->value = point_1->value - point_2->value;
     return 0;
 }
 
-int mul_point(POINT *point_1, POINT *point_2, POINT *out) {
+int mul_point(point *point_1, point *point_2, point *out) {
     out->value = point_1->value * point_2->value;
     return 0;
 }
 
-int div_point(POINT *point_1, POINT *point_2, POINT *out) {
+int div_point(point *point_1, point *point_2, point *out) {
     out->value = point_1->value / point_2->value;
     return 0;
 }

@@ -4,11 +4,11 @@
 
 int main() {
     int out_size[2];
-    MATRIX *matx_1 = load("matrices/matrix_1.txt", "matrix");
-    MATRIX *matx_2 = load("matrices/matrix_2.txt", "matrix");
+    matrix *matx_1 = load("matrices/matrix_1.txt", "matrix");
+    matrix *matx_2 = load("matrices/matrix_2.txt", "matrix");
 
     auto_compute_mat_mul_out_size(matx_1, matx_2, out_size);
-    MATRIX *out_matx = init_zero_matrix(out_size);
+    matrix *out_matx = init_zero_matrix(out_size);
 
     printf("matx_1:\n");
     print_obj(matx_1);

@@ -5,7 +5,7 @@
 #include "vector.h"
 #include "matrix.h"
 
-int free_matrix(MATRIX *matx) {
+int free_matrix(matrix *matx) {
     for (int i=0; i < matx->size[0]; i++) {
         free_vector(matx->value[i]);
     }
@@ -14,7 +14,7 @@ int free_matrix(MATRIX *matx) {
     return 0;
 }
 
-int print_matrix(MATRIX *matx) {
+int print_matrix(matrix *matx) {
     printf("[");
     for (int i=0; i < matx->size[0]; i++) {
         if (i!=0) {
@@ -32,15 +32,15 @@ int print_matrix(MATRIX *matx) {
     return 0;
 }
 
-MATRIX *init_matrix(VECTOR **vectors, int *size) {
-    MATRIX *matx = malloc(sizeof(MATRIX));
+matrix *init_matrix(vector **vectors, int *size) {
+    matrix *matx = malloc(sizeof(matrix));
     if (!matx) return NULL;
 
     matx->size[0] = size[0];
     matx->size[1] = size[1];
     matx->type = 2;
 
-    matx->value = malloc(size[0] * sizeof(VECTOR *));
+    matx->value = malloc(size[0] * sizeof(vector *));
     if (!matx->value) {
         free(matx);
         return NULL;
@@ -53,15 +53,15 @@ MATRIX *init_matrix(VECTOR **vectors, int *size) {
     return matx;
 }
 
-MATRIX *init_zero_matrix(int *size) {
-    MATRIX *matx = malloc(sizeof(MATRIX));
+matrix *init_zero_matrix(int *size) {
+    matrix *matx = malloc(sizeof(matrix));
     if (!matx) return NULL;
 
     matx->size[0] = size[0];
     matx->size[1] = size[1];
     matx->type = 2;
 
-    matx->value = malloc(size[0] * sizeof(VECTOR *));
+    matx->value = malloc(size[0] * sizeof(vector *));
     if (!matx->value) {
         free(matx);
         return NULL;
@@ -74,15 +74,15 @@ MATRIX *init_zero_matrix(int *size) {
     return matx;
 }
 
-MATRIX *init_one_matrix(int *size) {
-    MATRIX *matx = malloc(sizeof(MATRIX));
+matrix *init_one_matrix(int *size) {
+    matrix *matx = malloc(sizeof(matrix));
     if (!matx) return NULL;
 
     matx->size[0] = size[0];
     matx->size[1] = size[1];
     matx->type = 2;
 
-    matx->value = malloc(size[0] * sizeof(VECTOR *));
+    matx->value = malloc(size[0] * sizeof(vector *));
     if (!matx->value) {
         free(matx);
         return NULL;
@@ -95,63 +95,63 @@ MATRIX *init_one_matrix(int *size) {
     return matx;
 }
 
-int add_matrix(MATRIX *matx_1, MATRIX *matx_2, MATRIX *out) {
+int add_matrix(matrix *matx_1, matrix *matx_2, matrix *out) {
     for (int i=0; i < matx_1->size[0]; i++) {
         add_vector(matx_1->value[i], matx_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int add_point_to_matrix(MATRIX *matx, POINT *point, MATRIX *out) {
+int add_point_to_matrix(matrix *matx, point *point, matrix *out) {
     for (int i=0; i < matx->size[0]; i++) {
         add_point_to_vector(matx->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int diff_matrix(MATRIX *matx_1, MATRIX *matx_2, MATRIX *out) {
+int diff_matrix(matrix *matx_1, matrix *matx_2, matrix *out) {
     for (int i=0; i < matx_1->size[0]; i++) {
         diff_vector(matx_1->value[i], matx_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int diff_point_from_matrix(MATRIX *matx, POINT *point, MATRIX *out) {
+int diff_point_from_matrix(matrix *matx, point *point, matrix *out) {
     for (int i=0; i < matx->size[0]; i++) {
         diff_point_from_vector(matx->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int mul_matrix(MATRIX *matx_1, MATRIX *matx_2, MATRIX *out) {
+int mul_matrix(matrix *matx_1, matrix *matx_2, matrix *out) {
     for (int i=0; i < matx_1->size[0]; i++) {
         diff_vector(matx_1->value[i], matx_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int mul_matrix_by_point(MATRIX *matx, POINT *point, MATRIX *out) {
+int mul_matrix_by_point(matrix *matx, point *point, matrix *out) {
     for (int i=0; i < matx->size[0]; i++) {
         mul_vector_by_point(matx->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int div_matrix(MATRIX *matx_1, MATRIX *matx_2, MATRIX *out) {
+int div_matrix(matrix *matx_1, matrix *matx_2, matrix *out) {
     for (int i=0; i < matx_1->size[0]; i++) {
         div_vector(matx_1->value[i], matx_2->value[i], out->value[i]);
     }
     return 0;
 }
 
-int div_matrix_by_point(MATRIX *matx, POINT *point, MATRIX *out) {
+int div_matrix_by_point(matrix *matx, point *point, matrix *out) {
     for (int i=0; i < matx->size[0]; i++) {
         div_vector_by_point(matx->value[i], point, out->value[i]);
     }
     return 0;
 }
 
-int transpose_matrix(MATRIX *matx, MATRIX *out) {
+int transpose_matrix(matrix *matx, matrix *out) {
     for (int i=0; i < matx->size[0]; i++) {
         for (int j=0; j < matx->size[1]; j++) {
             out->value[j]->value[i] = matx->value[i]->value[j];
@@ -160,15 +160,15 @@ int transpose_matrix(MATRIX *matx, MATRIX *out) {
     return 0;
 }
 
-int auto_compute_mat_mul_out_size(MATRIX *matx_1, MATRIX *matx_2, int out[2]) {
+int auto_compute_mat_mul_out_size(matrix *matx_1, matrix *matx_2, int out[2]) {
     out[0] = matx_1->size[0];
     out[1] = matx_2->size[1];
     return 0;
 }
 
-int mat_mul_matrix(MATRIX *matx_1, MATRIX *matx_2, MATRIX *out) {
+int mat_mul_matrix(matrix *matx_1, matrix *matx_2, matrix *out) {
     int transposed_matx_2_size[2] = {matx_2->size[1], matx_2->size[0]};
-    MATRIX *transposed_matx_2 = init_zero_matrix(transposed_matx_2_size);
+    matrix *transposed_matx_2 = init_zero_matrix(transposed_matx_2_size);
     transpose_matrix(matx_2, transposed_matx_2);
     
     for (int i=0; i < matx_1->size[0]; i++) {

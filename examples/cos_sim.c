@@ -6,13 +6,13 @@
 int main() {
     double array_1[] = {1, 1, 1, 0};
 
-    VECTOR *v_1 = load("vectors/vec_1.txt", "vector");
-    VECTOR *v_2 = init_vector(array_1, 4);
+    vector *v_1 = load("vectors/vec_1.txt", "vector");
+    vector *v_2 = init_vector(array_1, 4);
 
-    POINT *mmul_res = init_zero_point();
+    point *mmul_res = init_zero_point();
 
-    POINT *v_1_l2_norm = init_zero_point();
-    POINT *v_2_l2_norm = init_zero_point();
+    point *v_1_l2_norm = init_zero_point();
+    point *v_2_l2_norm = init_zero_point();
 
     get_l2_norm(v_1, v_1_l2_norm);
     get_l2_norm(v_2, v_2_l2_norm);
