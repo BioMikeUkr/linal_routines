@@ -1,2 +1,2 @@
-# linal_routines_-
+# linal_routines
 Minimal C implementation of core linear algebra routines.
