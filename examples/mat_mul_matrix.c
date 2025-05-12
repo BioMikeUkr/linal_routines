@@ -18,4 +18,6 @@ int main() {
     mat_mul_matrix(matx_1, matx_2, out_matx);
     printf("mat_mul:\n");
     print_obj(out_matx);
+    
+    return 0;
 }
